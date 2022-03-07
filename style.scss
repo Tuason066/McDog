@@ -7,7 +7,7 @@
 }
 
 // fonts
-$ff-primary: cursive;
+$ff-primary: 'Caveat', cursive;
 $ff-secondary: 'Athiti', sans-serif;
 $ff-tertiary: 'Source Sans Pro', sans-serif;
 
@@ -39,18 +39,23 @@ a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+}
+
 button {
     text-transform: capitalize;
     padding: .3em .7em;
     display: inline-block;
     cursor: pointer;
+    transition: all 0.4s ease;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-family: $ff-primary;
+    font-family: $ff-secondary;
     text-transform: capitalize;
     line-height: 1.25;
     letter-spacing: $letter-spacing;
@@ -118,6 +123,7 @@ p {
 }
 
 .title {
+    font-family: $ff-primary;
     margin: 0;
     color: $clr-yellow;
     letter-spacing: .1rem;
@@ -289,6 +295,160 @@ p {
         }
     }
 
+}
 
+// ======================================= MENU
+
+.foods {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.menu-title {
+    padding: 2rem 0;
+    & h2 {
+        text-align: center;
+        margin-bottom: .3rem;
+        color: $clr-dark--green;
+        text-shadow: 1px 1px 2px $clr-dark--white;
+        font-family: $ff-secondary;
+    }
+    & .underline {
+        margin: 0 auto;
+        height: 3px;
+        width: 5rem;
+        border-radius: 1rem;
+        background-color: $clr-yellow;
+    }
+}
+
+@media (min-width: 770px) {
+
+    .menu-title {
+        padding: 4rem 0;
+        & h2 {
+            margin-bottom: .5rem;
+        }
+    }
+
+}
+
+// menu container
+.menu-container {
+    width: 90%;
+    max-width: 613px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.menu {
+    border: 1px solid red;
+    background-color: $clr-dark--white;
+    border-radius: .25rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    &__photo {
+        width: 100%;
+        max-width: 300px;
+        height: 100%;
+        max-height: 176px;
+        object-fit: cover;
+    }
+    &__desc {
+        // margin: 0 0 auto;
+        border: 1px solid red;
+    }
+}
+
+.menu__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu__info header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $clr-light--green;
+    margin-bottom: .3rem;
+    & h4 {
+        margin-top: .5rem;
+        margin-bottom: .3rem;
+        color: $clr-dark--green;
+        letter-spacing: .1rem;
+        // text-shadow: 1px 1px 1px $clr-light--green;
+    }
+    & .price {
+        color: $clr-yellow;
+        text-shadow: 1px 1px 1px $clr-black;
+    }
+}
+
+// purchase items
+.purchase {
+    margin-top: 2rem;
+    // justify-self: flex-end;
+    text-align: center;
+    &__quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & button {
+            background-color: $clr-dark--green;
+            color: $clr-white;
+            outline: none;
+            border: 1px solid $clr-dark--green;
+            border-radius: .3rem;
+            padding: .3em .5em;
+            &:hover {
+                background-color: transparent;
+                color: $clr-dark--green;
+            }
+            
+        }
+        & .item-quantity {
+            padding: .3em .7em;
+        }
+    }
+}
+
+.purchase-btn {
+    margin-top: .5rem;
+    letter-spacing: .1rem;
+    background-color: $clr-yellow;
+    color: $clr-dark--green;
+    border: 1px solid transparent;
+    border-radius: .3rem;
+    padding: .3em 1em;
+    &:hover {
+        background-color: transparent;
+        border: 1px solid $clr-dark--green;
+    }
+}
+
+@media (min-width: 700px) {
+
+    .menu-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .menu {
+        margin-bottom: 0;
+    }
+
+}
+@media (min-width: 900px) {
+
+    .menu-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        max-width: calc(900px + 2rem);
+    }
 
 }

@@ -80,8 +80,10 @@ const sidebar = document.querySelector('.aside-navbar');
 const sidebarBtn = document.querySelector('.close-nav');
 const linksBtn = document.querySelectorAll('.x');
 
-linksBtn.addEventListener('click', function(e) {
-  e.preventDefault();
+linksBtn.forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+  });
 });
 
 navToggle.addEventListener('click', function() {
@@ -92,4 +94,41 @@ navToggle.addEventListener('click', function() {
 sidebarBtn.addEventListener('click', function() {
   sidebar.classList.remove('show-sidebar');
   navToggle.classList.remove('show-bars');
+});
+
+// ============= NAVBAR
+// selecting items
+const menuContainer = document.querySelector('.menu-container');
+
+window.addEventListener('DOMContentLoaded', function() {
+
+  const menuItems = menu.map(function(menuItem) {
+    return `<article class="menu">
+    <img src="${menuItem.img}" class="menu__photo" alt="${menuItem.title}" />
+    <div class="menu__info">
+        <header>
+            <h4>${menuItem.title}</h4>
+            <h4 class="price">&#8369;${menuItem.price}</h4>
+        </header>
+        <div class="menu__desc">
+            <p>${menuItem.desc}</p>
+        </div>
+        <div class="purchase">
+            <div class="purchase__quantity">
+                <button type="button" class="add-quantity">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <span class="item-quantity">10</span>
+                <button type="button" class="minus-quantity">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
+            </div>
+            <button class="purchase-btn">purchase</button>
+        </div>
+    </div>
+</article>`
+  }).join('');
+
+  menuContainer.innerHTML = menuItems;
+
 });
