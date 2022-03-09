@@ -49,6 +49,9 @@ button {
     display: inline-block;
     cursor: pointer;
     transition: all 0.4s ease;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 
 h1,
@@ -105,7 +108,7 @@ p {
 
 // ===== header
 
-.header-title {
+.header-brand {
     box-shadow: 0px 0px 1px $clr-black;
     width: 100%;
     max-width: 1440px;
@@ -113,7 +116,7 @@ p {
 }
 
 // title
-.title-container {
+.brand-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -122,23 +125,20 @@ p {
     margin: 0 auto;
 }
 
-.title {
+.brand {
     font-family: $ff-primary;
     margin: 0;
     color: $clr-yellow;
     letter-spacing: .1rem;
     text-shadow: 1px 1px 1px $clr-black;
 }
-.title span {
+.brand span {
     color: $clr-black;
     text-shadow: 1px 1px 1px $clr-yellow;
 }
 
 .nav-toggle,
 .close-nav {
-    background: none;
-    outline: none;
-    border: none;
     font-size: 1rem;
 }
 
@@ -158,12 +158,12 @@ p {
 
 // ======= ASIDE NAVBAR ====== 
 .aside-navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     max-width: 450px;
-    height: 100%;
+    height: 100vh;
     background-color: $clr-dark--white;
     display: flex;
     flex-direction: column;
@@ -217,6 +217,12 @@ p {
     text-transform: capitalize;
     letter-spacing: .1rem;
     font-family: $ff-secondary;
+    transition: all 0.2s ease;
+}
+
+.links__btn:hover {
+    // transform: translateY(-.1rem);
+    transform: scale(1.1);
 }
 
 .current-page {
@@ -267,7 +273,7 @@ p {
     }
 
     // title
-    .header-center {
+    .header-brand__center {
         width: 95%;
         box-shadow: 0px 0px 0px #000;
         margin: 0 auto;
@@ -276,7 +282,7 @@ p {
         align-items: center;
     }
 
-    .title-container {
+    .brand-container {
         display: block;
         margin: 0;
         width: unset;
@@ -299,7 +305,7 @@ p {
 
 // ======================================= MENU
 
-.foods {
+.menus {
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -325,111 +331,130 @@ p {
 @media (min-width: 770px) {
 
     .menu-title {
-        padding: 4rem 0;
+        padding: 4rem 0 1.5rem;
         & h2 {
             margin-bottom: .5rem;
         }
     }
 
+    .btn-container {
+        padding-bottom: 1rem;
+    }
+
 }
 
-// menu container
+// =================== filter buttons
+
+.btn-container {
+    text-align: center;
+    margin-bottom: .7rem;
+    // border: 1px solid red;
+}
+
+.filter-btn {
+    border: 1px solid $clr-dark--green;
+    color: $clr-dark--green;
+    border-radius: .3rem;
+    margin: .2rem;
+    letter-spacing: .1rem;
+    font-family: $ff-secondary;
+    &:hover {
+        background-color: $clr-dark--green;
+        color: white;
+    }
+}
+
+// =================== menu items
 .menu-container {
     width: 90%;
-    max-width: 613px;
+    max-width: calc(600px + 1rem);
     margin: 0 auto;
     margin-bottom: 2rem;
 }
 
 .menu {
-    border: 1px solid red;
-    background-color: $clr-dark--white;
-    border-radius: .25rem;
-    padding: 1rem;
-    width: 100%;
     max-width: 300px;
-    margin: 0 auto;
-    margin-bottom: 1rem;
-    &__photo {
-        width: 100%;
-        max-width: 300px;
-        height: 100%;
-        max-height: 176px;
-        object-fit: cover;
-    }
-    &__desc {
-        // margin: 0 0 auto;
-        border: 1px solid red;
-    }
-}
-
-.menu__info {
+    margin: 0 auto 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: $clr-dark--white;
     display: flex;
     flex-direction: column;
+
+    &__photo {
+        width: 100%;
+        max-height: 160px;
+        object-fit: cover;
+        border-top-left-radius: .3rem;
+        border-top-right-radius: .3rem;
+    }
 }
 
-.menu__info header {
+.menu-info {
+    margin: .7rem 0 auto;
+}
+
+.menu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid $clr-light--green;
-    margin-bottom: .3rem;
-    & h4 {
-        margin-top: .5rem;
-        margin-bottom: .3rem;
+    margin-bottom: .4rem;
+    & .title {
         color: $clr-dark--green;
+        margin-bottom: .2rem;
         letter-spacing: .1rem;
-        // text-shadow: 1px 1px 1px $clr-light--green;
+        padding-right: 1rem;
     }
     & .price {
         color: $clr-yellow;
+        margin-bottom: .2rem;
         text-shadow: 1px 1px 1px $clr-black;
+        letter-spacing: .1rem;
     }
+    
 }
 
-// purchase items
-.purchase {
-    margin-top: 2rem;
-    // justify-self: flex-end;
+.menu-purchase {
     text-align: center;
-    &__quantity {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        & button {
-            background-color: $clr-dark--green;
-            color: $clr-white;
-            outline: none;
-            border: 1px solid $clr-dark--green;
-            border-radius: .3rem;
-            padding: .3em .5em;
-            &:hover {
-                background-color: transparent;
-                color: $clr-dark--green;
-            }
-            
-        }
-        & .item-quantity {
-            padding: .3em .7em;
+}
+
+.purchaseBtns-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .item-quantity {
+        padding: .3em .7em;
+    }
+    & button {
+        background-color: $clr-dark--green;
+        color: $clr-white;
+        outline: none;
+        border: 1px solid $clr-dark--green;
+        border-radius: .3rem;
+        &:hover {
+            background-color: transparent;
+            color: $clr-dark--green;
         }
     }
 }
 
 .purchase-btn {
     margin-top: .5rem;
-    letter-spacing: .1rem;
     background-color: $clr-yellow;
-    color: $clr-dark--green;
-    border: 1px solid transparent;
+    border: 1px solid $clr-yellow;
     border-radius: .3rem;
     padding: .3em 1em;
+    color: $clr-black;
+    border: 1px solid $clr-yellow;
     &:hover {
         background-color: transparent;
+        color: $clr-dark--green;
         border: 1px solid $clr-dark--green;
     }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 770px){
 
     .menu-container {
         display: grid;
@@ -442,13 +467,34 @@ p {
     }
 
 }
+
 @media (min-width: 900px) {
 
     .menu-container {
-        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 1rem;
         max-width: calc(900px + 2rem);
     }
 
+}
+
+// ==================== FOOTER =====================\
+footer {
+    box-shadow: 0px 0px 1px $clr-black;
+    max-width: 1440px;
+    margin: 0 auto;
+    & p {
+        margin: 0;
+    }
+}
+
+.footer-container {
+    padding: 2rem 0;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.developer {
+    color: $clr-dark--green;
+    text-transform: capitalize;
 }

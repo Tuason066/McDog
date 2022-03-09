@@ -79,6 +79,7 @@ const navToggle = document.querySelector('.nav-toggle');
 const sidebar = document.querySelector('.aside-navbar');
 const sidebarBtn = document.querySelector('.close-nav');
 const linksBtn = document.querySelectorAll('.x');
+const btnContainer = document.querySelector('.btn-container');
 
 linksBtn.forEach(function(link) {
   link.addEventListener('click', function(e) {
@@ -102,33 +103,94 @@ const menuContainer = document.querySelector('.menu-container');
 
 window.addEventListener('DOMContentLoaded', function() {
 
-  const menuItems = menu.map(function(menuItem) {
+  displayMenuItems(menu);
+
+  displayFilterButtons();
+
+});
+
+// display filter buttons
+function displayFilterButtons() {
+  const category = menu.map(function(item) {
+    return item.category;
+  });
+
+  const categories = category.reduce(function(values, item) {
+    if(!values.includes(item)) {
+      values.push(item);
+    }
+    return values;
+  }, ['all']);
+
+  const menuBtns = categories.map(function(item) {
+    return `<button class="filter-btn" data-id="${item}" type="button">${item}</button>`
+  }).join('');
+
+  btnContainer.innerHTML = menuBtns;
+  
+
+  const filterBtns = btnContainer.querySelectorAll('.filter-btn');
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      const btnClicked = e.currentTarget.dataset.id;
+
+      const filteredMenus = menu.filter(function (item) {
+        if(btnClicked === item.category) {
+          return item;
+        };
+      });
+
+      if(btnClicked === 'all') {
+        displayMenuItems(menu);
+      } else {
+        displayMenuItems(filteredMenus);
+      }
+
+    });
+  });
+};
+
+// display menu items
+function displayMenuItems(menuItem) {
+
+  const menuItems = menuItem.map(function(item) {
     return `<article class="menu">
-    <img src="${menuItem.img}" class="menu__photo" alt="${menuItem.title}" />
-    <div class="menu__info">
-        <header>
-            <h4>${menuItem.title}</h4>
-            <h4 class="price">&#8369;${menuItem.price}</h4>
+    <img src="${item.img}" class="menu__photo" alt="${item.title}" />
+    <div class="menu-info">
+        <header class="menu-header">
+            <h4 class="title">${item.title}</h4>
+            <h4 class="price">&#8369;${item.price}</h4>
         </header>
-        <div class="menu__desc">
-            <p>${menuItem.desc}</p>
+        <div class="menu-desc">
+            <p>${item.desc}</p>
         </div>
-        <div class="purchase">
-            <div class="purchase__quantity">
-                <button type="button" class="add-quantity">
+    </div>
+    <div class="menu-purchase">
+            <div class="purchaseBtns-container">
+                <button type="button" class="add">
                     <i class="fa-solid fa-plus"></i>
                 </button>
                 <span class="item-quantity">10</span>
-                <button type="button" class="minus-quantity">
+                <button type="button" class="minus">
                     <i class="fa-solid fa-minus"></i>
                 </button>
             </div>
-            <button class="purchase-btn">purchase</button>
+            <button class="purchase-btn">buy now</button>
         </div>
-    </div>
-</article>`
+  </article>`
   }).join('');
 
   menuContainer.innerHTML = menuItems;
 
-});
+};
+
+
+//  ==================== copyright ============
+
+// selecting item
+const copyright = document.querySelector('.copyright');
+
+const year = new Date().getFullYear();
+
+copyright.textContent = year;
