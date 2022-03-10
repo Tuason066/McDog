@@ -80,6 +80,19 @@ const sidebar = document.querySelector('.aside-navbar');
 const sidebarBtn = document.querySelector('.close-nav');
 const linksBtn = document.querySelectorAll('.x');
 const btnContainer = document.querySelector('.btn-container');
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelector('.modal-btn');
+// preloader
+const preloader = document.querySelector('.preloader');
+
+window.addEventListener('load' , function() {
+  preloader.classList.add('hide-preloader');
+});
+
+// modal
+modalBtn.addEventListener('click', function() {
+  modal.classList.toggle('show-modal');
+});
 
 linksBtn.forEach(function(link) {
   link.addEventListener('click', function(e) {
@@ -168,11 +181,11 @@ function displayMenuItems(menuItem) {
     </div>
     <div class="menu-purchase">
             <div class="purchaseBtns-container">
-                <button type="button" class="add">
+                <button type="button" class="quantity" data-id="add">
                     <i class="fa-solid fa-plus"></i>
                 </button>
-                <span class="item-quantity">10</span>
-                <button type="button" class="minus">
+                <span class="item-quantity">1</span>
+                <button type="button" class="quantity" data-id="minus">
                     <i class="fa-solid fa-minus"></i>
                 </button>
             </div>
@@ -182,6 +195,43 @@ function displayMenuItems(menuItem) {
   }).join('');
 
   menuContainer.innerHTML = menuItems;
+
+  const menus = document.querySelectorAll('.menu');
+  
+  menus.forEach(function(menu) {
+    const btns = menu.querySelectorAll('.quantity');
+    const purchaseBtn = menu.querySelector('.purchase-btn');
+    const quantity = menu.querySelector('.item-quantity');
+
+    purchaseBtn.addEventListener('click', function() {
+      modal.classList.add('show-modal');
+    });
+
+    let initialQuantity = 0;
+
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        if(e.currentTarget.dataset.id === 'add') {
+          initialQuantity++;
+          quantity.textContent = initialQuantity;
+        };
+        if(e.currentTarget.dataset.id === 'minus') {
+          if(initialQuantity >= 2) {
+            initialQuantity--;
+            quantity.textContent = initialQuantity;
+          } else {
+            initialQuantity = 1;
+            quantity.textContent = initialQuantity;
+          };
+        };
+      });
+    });
+  });
+
+  // purchase
+  /* purchaseBtn.addEventListener('click', function() {
+    modal.classList.add('show-modal');
+  }); */
 
 };
 
